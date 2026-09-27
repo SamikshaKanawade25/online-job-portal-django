@@ -1,0 +1,22 @@
+{% extends 'jobs/base.html' %}
+{% block title %}Applicants{% endblock %}
+{% block content %}
+<h3 class="mb-3">Applicants for "{{ job.title }}"</h3>
+<table class="table table-striped bg-white">
+    <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Applied On</th>
+    </tr>
+    {% for app in applications %}
+    <tr>
+        <td>{{ app.applicant.username }}</td>
+        <td>{{ app.applicant.email }}</td>
+        <td>{{ app.applied_date|date:"d M Y" }}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="3">No applicants yet.</td></tr>
+    {% endfor %}
+</table>
+<a href="{% url 'job_list' %}" class="btn btn-secondary mt-3">Back</a>
+{% endblock %}

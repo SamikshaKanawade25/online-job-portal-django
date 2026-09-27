@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Job Portal{% endblock %}</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background: #f0f2f5; }
+        .navbar { background: #2c3e50 !important; }
+        .navbar-brand, .nav-link { color: white !important; }
+        .card-header { background: #2c3e50; color: white; }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg mb-4">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'job_list' %}">💼 Job Portal</a>
+        <div>
+            {% if user.is_authenticated %}
+                <span class="nav-link d-inline">Hi, {{ user.username }}</span>
+                <a class="nav-link d-inline" href="{% url 'my_applications' %}">My Applications</a>
+                <a class="nav-link d-inline" href="{% url 'job_post' %}">+ Post Job</a>
+                <a class="nav-link d-inline" href="{% url 'logout' %}">Logout</a>
+            {% else %}
+                <a class="nav-link d-inline" href="{% url 'login' %}">Login</a>
+                <a class="nav-link d-inline" href="{% url 'signup' %}">Sign Up</a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+<div class="container">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-info">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+    {% block content %}{% endblock %}
+</div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{% extends 'jobs/base.html' %}
+{% block title %}My Applications{% endblock %}
+{% block content %}
+<h3 class="mb-3">My Applications</h3>
+<table class="table table-striped bg-white">
+    <tr>
+        <th>Job Title</th>
+        <th>Company</th>
+        <th>Applied On</th>
+    </tr>
+    {% for app in applications %}
+    <tr>
+        <td>{{ app.job.title }}</td>
+        <td>{{ app.job.company_name }}</td>
+        <td>{{ app.applied_date|date:"d M Y" }}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="3">You haven't applied to any jobs yet.</td></tr>
+    {% endfor %}
+</table>
+{% endblock %}
